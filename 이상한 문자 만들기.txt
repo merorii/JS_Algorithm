@@ -1,0 +1,53 @@
+﻿<문제>
+
+* 문제 설명
+문자열 s는 한 개 이상의 단어로 구성되어 있습니다. 각 단어는 하나 이상의 공백문자로 구분되어 있습니다. 각 단어의 짝수번째 알파벳은 대문자로, 홀수번째 알파벳은 소문자로 바꾼 문자열을 리턴하는 함수, solution을 완성하세요.
+
+* 제한 사항
+문자열 전체의 짝/홀수 인덱스가 아니라, 단어(공백을 기준)별로 짝/홀수 인덱스를 판단해야합니다.
+첫 번째 글자는 0번째 인덱스로 보아 짝수번째 알파벳으로 처리해야 합니다.
+
+* 입출력 예
+s	return
+try hello world	TrY HeLlO WoRlD
+
+* 입출력 예 설명
+try hello world는 세 단어 try, hello, world로 구성되어 있습니다. 각 단어의 짝수번째 문자를 대문자로, 홀수번째 문자를 소문자로 바꾸면 TrY, HeLlO, WoRlD입니다. 따라서 TrY HeLlO WoRlD 를 리턴합니다.
+
+<풀이>
+머리속으로 생각할때는 전혀 복잡하지 않은 문제지만
+짜잘하게 케이스를 나눠서 생각해주어야하는 문제였다.
+
+먼저 문자열을 잘라서 배열안에 저장
+각 배열 원소 안을 돌면서 홀수번째는 대문자로, 짝수번째는 소문자로 변경
+한 원소를 다 돌고나면 공백삽입
+하지만 마지막인 경우에는 공백삽입X!
+순서로 진행해주었다.
+
+function solution(s) {
+    var answer = '';
+    s.split(' ').forEach((i,idx)=>{
+        for(var j=0; j<i.length;j++){
+            j%2==0?answer+=i[j].toUpperCase():answer+=i[j].toLowerCase();
+        }
+        if((idx+1) !== s.split(' ').length) answer+=' ';
+    });
+    return answer;
+}
+복잡해보이지만 사실 지금까지 하던거와 똑같긴 하다. 
+
+
++다른사람코드
+
+function toWeirdCase(s){
+  //함수를 완성해주세요
+  return s.toUpperCase().replace(/(\w)(\w)/g, function(a){return a[0].toUpperCase()+a[1].toLowerCase();})
+
+}
+정규식을 사용해주는 방법도 있지만...
+아무리봐도 정규식을 잘 사용하지는 못할 것 같기 때문에 그냥 참고만 하고 넘어가려고 한다.
+
+function toWeirdCase(s){
+  return s.split(' ').map(i => i.split('').map((j, key) => key % 2 === 0 ? j.toUpperCase() : j).join('')).join(' ')
+}
+오.. 깔끔해 좋당
