@@ -1,1 +1,3 @@
-# Programmers-Algorithm
+# JS-Algorithm
+
+프로그래머스 사이트의 알고리즘 문제를 기록하고 있습니다! (●'◡'●)
